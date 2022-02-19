@@ -1,28 +1,33 @@
-import axios from 'axios';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {Button, View} from 'react-native';
+import { getSepatu, postSepatu } from '../src/services/sepatu';
 
 const GetShoes = () => {
-  const instance = axios.create({
-    baseURL: 'http://192.168.1.6:8000/api',
-    timeout: 1000,
-    headers: {
-      'Content-Type': 'application-json',
-      'X-Costum-Header': 'foobar'
-    }
-  });
+  const [produk, setProduk] = useState('Converse');
+  const [ukuran, setUkuran] = useState(41);
+  const [stok, setStok] = useState(10);
 
   const get = useCallback(() => {
-    instance
-      .get('/v2/produk')
-      .then(res => console.log(res.data.produk))
-      .catch(err => console.log(err))
-      .then(() => console.log('always executed'));
-  }, [])
+    getSepatu()
+    .then(res => console.log(res.data.produk))
+    .catch(err => console.log(err))
+  }, []);
+
+  // post nya masih error dibagian body nya null
+  const post = useCallback(() => {
+    postSepatu({
+      nama_produk: produk,
+      ukuran: ukuran,
+      stok: stok,
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <View>
       <Button title='get' onPress={get} />
+      <Button title='post' onPress={post} />
     </View>
   )
 }
