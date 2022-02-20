@@ -1,19 +1,19 @@
 import { BaseService } from "../BaseService";
 
 function getSepatu() {
-  return BaseService.get('/v2/produk');
+  return BaseService.get('/produk');
 }
 
 function postSepatu(body) {
-  return BaseService.post('/v2/produk', body);
+  return BaseService.post('/produk', body);
 }
 
 function updateSepatu(id, body) {
-  return BaseService.put(`/v2/produk/${id}`, body);
+  return BaseService.put(`/produk/${id}`, body);
 }
 
 function deleteSepatu(id) {
-  return BaseService.delete(`/v2/produk/${id}`);
+  return BaseService.delete(`/produk/${id}`);
 }
 
 export {
