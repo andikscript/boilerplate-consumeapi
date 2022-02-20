@@ -5,8 +5,8 @@ import { deleteSepatu, getSepatu, postSepatu, updateSepatu } from '../src/servic
 const GetShoes = () => {
   const [produk, setProduk] = useState({
     nama_produk: 'Converse',
-    ukuran: 42,
-    stok: 20,
+    ukuran: 43,
+    stok: 10,
   });
 
   const get = useCallback(() => {
@@ -22,13 +22,13 @@ const GetShoes = () => {
   }, []);
 
   const put = useCallback(() => {
-    updateSepatu(12,produk)
+    updateSepatu(14,produk)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const remove = useCallback(() => {
-    deleteSepatu(5)
+    deleteSepatu(12)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
