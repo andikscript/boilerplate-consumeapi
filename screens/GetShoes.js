@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import {Button, View} from 'react-native';
-import { getSepatu, postSepatu } from '../src/services/sepatu';
+import { deleteSepatu, getSepatu, postSepatu, updateSepatu } from '../src/services/sepatu';
 
 const GetShoes = () => {
-  const [produk, setProduk] = useState('Converse');
-  const [ukuran, setUkuran] = useState(41);
-  const [stok, setStok] = useState(10);
+  const [produk, setProduk] = useState({
+    nama_produk: 'Converse',
+    ukuran: 42,
+    stok: 20,
+  });
 
   const get = useCallback(() => {
     getSepatu()
@@ -13,14 +15,21 @@ const GetShoes = () => {
     .catch(err => console.log(err))
   }, []);
 
-  // post nya masih error dibagian body nya null
   const post = useCallback(() => {
-    postSepatu({
-      nama_produk: produk,
-      ukuran: ukuran,
-      stok: stok,
-    })
-      .then(res => console.log(res))
+    postSepatu(produk)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  const put = useCallback(() => {
+    updateSepatu(12,produk)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  const remove = useCallback(() => {
+    deleteSepatu(5)
+      .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
 
@@ -28,6 +37,8 @@ const GetShoes = () => {
     <View>
       <Button title='get' onPress={get} />
       <Button title='post' onPress={post} />
+      <Button title='put' onPress={put} />
+      <Button title='delete' onPress={remove} />
     </View>
   )
 }

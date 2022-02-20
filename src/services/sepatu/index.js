@@ -5,10 +5,20 @@ function getSepatu() {
 }
 
 function postSepatu(body) {
-  BaseService.post('/v2/produk', body);
+  return BaseService.post('/v2/produk', body);
+}
+
+function updateSepatu(id, body) {
+  return BaseService.put(`/v2/produk/${id}`, body);
+}
+
+function deleteSepatu(id) {
+  return BaseService.delete(`/v2/produk/${id}`);
 }
 
 export {
   getSepatu,
-  postSepatu
+  postSepatu,
+  updateSepatu,
+  deleteSepatu,
 }
