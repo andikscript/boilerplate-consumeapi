@@ -1,7 +1,8 @@
 import axios from "axios";
+import {API_URL} from '@env';
 
 const BaseService = axios.create({
-  baseURL: process.env.REACT_APP_REST_URL,
+  baseURL: API_URL,
   timeout: 1000,
   headers: {
     Accept: 'application/json',
