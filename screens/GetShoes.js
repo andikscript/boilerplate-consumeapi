@@ -3,11 +3,10 @@ import {Button, View} from 'react-native';
 import { deleteSepatu, getSepatu, postSepatu, updateSepatu } from '../src/services/sepatu';
 
 const GetShoes = () => {
-  const [produk, setProduk] = useState({
-    nama_produk: 'Converse',
-    ukuran: 44,
-    stok: 20,
-  });
+  const [id, setId] = useState(15);
+  const [namaProduk, setNamaProduk] = useState('Converse');
+  const [ukuran, setUkuran] = useState(44);
+  const [stok, setStok] = useState(20);
 
   const get = useCallback(() => {
     getSepatu()
@@ -16,19 +15,27 @@ const GetShoes = () => {
   }, []);
 
   const post = useCallback(() => {
-    postSepatu(produk)
+    postSepatu({
+      nama_produk: namaProduk,
+      ukuran: ukuran,
+      stok: stok
+    })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const put = useCallback(() => {
-    updateSepatu(15,produk)
+    updateSepatu(id, {
+      nama_produk: namaProduk,
+      ukuran: ukuran,
+      stok: stok,
+    })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const remove = useCallback(() => {
-    deleteSepatu(15)
+    deleteSepatu(id)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }, []);
